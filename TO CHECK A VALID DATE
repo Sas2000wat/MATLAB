@@ -1,0 +1,45 @@
+function valid = valid_date(year,month,day)
+    type=pos_neg(year,month,day);
+    leap=leap_year(year);
+    months=valid_month(month);
+    if (type==true)&(months==true)
+        
+    
+        if ((month==1)|(month==3)|(month==5)|(month==7)|(month==8)|(month==10)|(month==12))&(day<32) 
+            valid=true;
+        elseif ((month==4)|(month==6)|(month==9)|(month==11))&(day<31)
+            valid=true;
+        elseif ((leap==true)&((month==2)&(day<30)))|((leap==false)&((month==2)&(day<29)))
+            valid=true;
+        else
+            valid=false;
+        end
+    else
+        valid=false;
+    end
+function type= pos_neg(year,month,day)
+    if ( (year>0)&(month>0)&(day>0) )&( (floor(year)==ceil(year))&(floor(month)==ceil(month))&(floor(day)==ceil(day)) )&( (isscalar(year))&(isscalar(month))&(isscalar(day)) ) 
+        type=true;
+    else
+        type=false
+    end
+    
+function leap=leap_year(year)
+    r=rem(year,4);
+    q=rem(year,100);
+    s=rem(year,400);
+    if (s==0)|((r==0)&(q~=0)) 
+         leap=true;
+      
+    else
+         leap=false;
+            
+        
+    end
+  
+function months=valid_month(month)
+    if (month<13) & (month>0)
+         months=true;
+    else
+         months=false;        
+    end
